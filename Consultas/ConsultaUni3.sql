@@ -67,7 +67,6 @@ GROUP BY P.NOMBRE;
 
 --13. Obtener el maximo de las sumas de los costesbasicos de cada cuatrimestre.
 SELECT MAX(SUM(COSTEBASICO)) FROM ASIGNATURA GROUP BY CUATRIMESTRE; 
---MAL
 
 --14. Suma del coste de las asignaturas.
 SELECT SUM(COSTEBASICO) FROM ASIGNATURA;
@@ -87,15 +86,46 @@ SELECT COUNT (DISTINCT CURSO) FROM ASIGNATURA;
 --19. Cuantas ciudades hay.
 SELECT COUNT (DISTINCT CIUDAD) FROM PERSONA;
 
---20. Nombre y numero de horas de todas las asignaturas.
-SELECT 
-Mostrar las asignaturas que no pertenecen a ninguna titulaciï¿½n.
-Listado del nombre completo de las personas, sus telï¿½fonos y sus direcciones, llamando a la columna del nombre "NombreCompleto" y a la de direcciones "Direccion".
-Cual es el dï¿½a siguiente al dï¿½a en que nacieron las personas de la B.D.
-Aï¿½os de las personas de la Base de Datos, esta consulta tiene que valor para cualquier momento
-Listado de personas mayores de 25 aï¿½os ordenadas por apellidos y nombre, esta consulta tiene que valor para cualquier momento
-Nombres completos de los profesores que ademï¿½s son alumnos
-Suma de los crï¿½ditos de las asignaturas de la titulaciï¿½n de Matemï¿½ticas
-Nï¿½mero de asignaturas de la titulaciï¿½n de Matemï¿½ticas
-ï¿½Cuï¿½nto paga cada alumno por su matrï¿½cula?
-ï¿½Cuï¿½ntos alumnos hay matriculados en cada asignatura?
+--20. Nombre y numero de horas de todas las asignaturas (1cred.=10 horas).
+SELECT NOMBRE, CREDITOS*10 NUMHORAS FROM ASIGNATURA;
+
+--21. Mostrar las asignaturas que no pertenecen a ninguna titulacion.
+SELECT NOMBRE FROM ASIGNATURA WHERE IDTITULACION IS NULL;
+
+--22. Listado del nombre completo de las personas, sus telefonos y sus direcciones, llamando a la columna del nombre 
+-- "NombreCompleto" y a la de direcciones "Direccion".
+SELECT NOMBRE ||' '|| APELLIDO NOMBRECOMPLETO, TELEFONO, DIRECCIONCALLE ||' '|| DIRECCIONNUM DIRECCION FROM PERSONA;
+
+--23. Cual es el dia siguiente al dia en que nacieron las personas de la B.D.
+SELECT FECHA_NACIMIENTO+1 FROM PERSONA; 
+
+--24. Anyos de las personas de la Base de Datos, esta consulta tiene que valor para cualquier momento.
+SELECT EXTRACT (YEAR FROM SYSDATE)-EXTRACT (YEAR FROM FECHA_NACIMIENTO) FROM PERSONA;
+
+--25. Listado de personas mayores de 25 anyos ordenadas por apellidos y nombre, esta consulta tiene que valor para cualquier momento.
+SELECT APELLIDO, NOMBRE FROM PERSONA 
+WHERE EXTRACT (YEAR FROM SYSDATE)-EXTRACT (YEAR FROM FECHA_NACIMIENTO) > 25
+ORDER BY APELLIDO ASC, NOMBRE ASC;
+
+--26. Nombres completos de los profesores que ademas son alumnos.
+SELECT P.NOMBRE ||' '|| P.APELLIDO NOMBRECOMPLETO FROM PERSONA P, PROFESOR PR, ALUMNO A
+WHERE PR.DNI = P.DNI 
+AND A.DNI = P.DNI;
+
+--27. Suma de los creditos de las asignaturas de la titulacion de Matematicas.
+SELECT SUM (ASIG.CREDITOS) FROM ASIGNATURA ASIG, TITULACION T
+WHERE ASIG.IDTITULACION = T.IDTITULACION 
+AND T.NOMBRE = 'Matematicas';
+
+--28. Numero de asignaturas de la titulacion de Matematicas.
+SELECT COUNT (ASIG.IDASIGNATURA) FROM ASIGNATURA ASIG, TITULACION T
+WHERE ASIG.IDTITULACION = T.IDTITULACION 
+AND T.NOMBRE = 'Matematicas';
+
+--29. ¿Cuanto paga cada alumno por su matricula?
+SELECT SUM (ASIG.COSTEBASICO), ALAS.IDALUMNO FROM ASIGNATURA ASIG, ALUMNO_ASIGNATURA ALAS
+WHERE ASIG.IDASIGNATURA = ALAS.IDASIGNATURA 
+GROUP BY ALAS.IDALUMNO;
+
+--30. ¿Cuantos alumnos hay matriculados en cada asignatura?
+SELECT COUNT (ALAS.IDALUMNO), ALAS.IDASIGNATURA FROM ALUMNO_ASIGNATURA ALAS GROUP BY ALAS.IDASIGNATURA;
