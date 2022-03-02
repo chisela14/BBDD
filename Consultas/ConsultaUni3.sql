@@ -28,14 +28,14 @@ AND ALAS.IDALUMNO = A.IDALUMNO
 GROUP BY ASIG.NOMBRE;
 
 --7. Mostrar para cada alumno, el nombre del alumno junto con lo que tendria que pagar por el total de todas las asignaturas en 
---las que esta matriculado. Recuerda que el precio de la matricula tiene un incremento de un 10% por cada año en el que este matriculado. 
+--las que esta matriculado. Recuerda que el precio de la matricula tiene un incremento de un 10% por cada aÃ±o en el que este matriculado. 
 SELECT P.NOMBRE, SUM (ASIG.COSTEBASICO* POWER (1.1,ALAS.NUMEROMATRICULA-1)) COSTETOTAL FROM ASIGNATURA ASIG, ALUMNO_ASIGNATURA ALAS, ALUMNO A, PERSONA P
 WHERE ASIG.IDASIGNATURA = ALAS.IDASIGNATURA 
 AND ALAS.IDALUMNO = A.IDALUMNO
 AND A.DNI = P.DNI 
 GROUP BY P.NOMBRE;
 
---8. Coste medio de las asignaturas de cada titulacion, para aquellas titulaciones en el que el coste total de la 1ª matricula sea mayor que 60 euros. 
+--8. Coste medio de las asignaturas de cada titulacion, para aquellas titulaciones en el que el coste total de la 1a matricula sea mayor que 60 euros. 
 SELECT AVG (ASIG.COSTEBASICO), T.NOMBRE FROM ASIGNATURA ASIG, TITULACION T
 WHERE ASIG.IDTITULACION = T.IDTITULACION 
 AND ASIG.COSTEBASICO > 60
@@ -48,29 +48,54 @@ WHERE ALAS.IDASIGNATURA = ASIG.IDASIGNATURA
 AND ASIG.IDTITULACION = T.IDTITULACION 
 AND COUNT (ALAS.IDALUMNO) > 3;
 
+--10. Nombre de cada ciudad junto con el numero de personas que viven en ella.
+SELECT P.CIUDAD, COUNT (P.DNI) FROM PERSONA P GROUP BY P.CIUDAD;
 
-Nombre de cada ciudad junto con el número de personas que viven en ella.
+--11. Nombre de cada profesor junto con el numero de asignaturas que imparte.
+SELECT P.NOMBRE, COUNT (ASIG.IDASIGNATURA) FROM PERSONA P, PROFESOR PR, ASIGNATURA ASIG
+WHERE P.DNI = PR.DNI 
+AND PR.IDPROFESOR = ASIG.IDPROFESOR 
+GROUP BY P.NOMBRE;
 
-Nombre de cada profesor junto con el número de asignaturas que imparte.
+--12. Nombre de cada profesor junto con el numero de alumnos que tiene, para aquellos profesores que tengan dos o mas de 2 alumnos.
+SELECT P.NOMBRE, COUNT (ALAS.IDALUMNO) NUMALUMNOS FROM PERSONA P, PROFESOR PR, ASIGNATURA ASIG, ALUMNO_ASIGNATURA ALAS 
+WHERE P.DNI = PR.DNI 
+AND PR.IDPROFESOR = ASIG.IDPROFESOR
+AND ASIG.IDASIGNATURA = ALAS.IDASIGNATURA 
+HAVING COUNT (ALAS.IDALUMNO) >= 2
+GROUP BY P.NOMBRE;
 
-Nombre de cada profesor junto con el número de alumnos que tiene, para aquellos profesores que tengan dos o más de 2 alumnos.
+--13. Obtener el maximo de las sumas de los costesbasicos de cada cuatrimestre.
+SELECT MAX(SUM(COSTEBASICO)) FROM ASIGNATURA GROUP BY CUATRIMESTRE; 
+--MAL
 
-Obtener el máximo de las sumas de los costesbásicos de cada cuatrimestre
+--14. Suma del coste de las asignaturas.
+SELECT SUM(COSTEBASICO) FROM ASIGNATURA;
 
-Suma del coste de las asignaturas
-¿Cuántas asignaturas hay?
-Coste de la asignatura más cara y de la más barata
-¿Cuántas posibilidades de créditos de asignatura hay?
-¿Cuántos cursos hay?
-¿Cuántas ciudades hau?
-Nombre y número de horas de todas las asignaturas.
-Mostrar las asignaturas que no pertenecen a ninguna titulación.
-Listado del nombre completo de las personas, sus teléfonos y sus direcciones, llamando a la columna del nombre "NombreCompleto" y a la de direcciones "Direccion".
-Cual es el día siguiente al día en que nacieron las personas de la B.D.
-Años de las personas de la Base de Datos, esta consulta tiene que valor para cualquier momento
-Listado de personas mayores de 25 años ordenadas por apellidos y nombre, esta consulta tiene que valor para cualquier momento
-Nombres completos de los profesores que además son alumnos
-Suma de los créditos de las asignaturas de la titulación de Matemáticas
-Número de asignaturas de la titulación de Matemáticas
-¿Cuánto paga cada alumno por su matrícula?
-¿Cuántos alumnos hay matriculados en cada asignatura?
+--15. Cuantas asignaturas hay.
+SELECT COUNT (IDASIGNATURA) FROM ASIGNATURA;
+
+--16. Coste de la asignatura mas cara y de la mas barata.
+SELECT MAX(COSTEBASICO), MIN (COSTEBASICO) FROM ASIGNATURA;
+
+--17. Cuantas posibilidades de creditos de asignatura hay.
+SELECT COUNT ( DISTINCT CREDITOS) FROM ASIGNATURA;
+
+--18. Cuantos cursos hay.
+SELECT COUNT (DISTINCT CURSO) FROM ASIGNATURA;
+
+--19. Cuantas ciudades hay.
+SELECT COUNT (DISTINCT CIUDAD) FROM PERSONA;
+
+--20. Nombre y numero de horas de todas las asignaturas.
+SELECT 
+Mostrar las asignaturas que no pertenecen a ninguna titulaciï¿½n.
+Listado del nombre completo de las personas, sus telï¿½fonos y sus direcciones, llamando a la columna del nombre "NombreCompleto" y a la de direcciones "Direccion".
+Cual es el dï¿½a siguiente al dï¿½a en que nacieron las personas de la B.D.
+Aï¿½os de las personas de la Base de Datos, esta consulta tiene que valor para cualquier momento
+Listado de personas mayores de 25 aï¿½os ordenadas por apellidos y nombre, esta consulta tiene que valor para cualquier momento
+Nombres completos de los profesores que ademï¿½s son alumnos
+Suma de los crï¿½ditos de las asignaturas de la titulaciï¿½n de Matemï¿½ticas
+Nï¿½mero de asignaturas de la titulaciï¿½n de Matemï¿½ticas
+ï¿½Cuï¿½nto paga cada alumno por su matrï¿½cula?
+ï¿½Cuï¿½ntos alumnos hay matriculados en cada asignatura?
