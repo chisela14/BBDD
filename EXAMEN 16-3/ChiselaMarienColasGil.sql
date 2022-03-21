@@ -35,6 +35,13 @@ FROM SALA
 WHERE AFORO > 600
 ORDER BY AFORO DESC;
 
+/*Apartado 5: incorrecto. Lo correcto sería: 
+SELECT CINE , SUM(nvl(AFORO,0))
+FROM SALA s
+GROUP BY CINE
+HAVING SUM(nvl(AFORO,0))>600
+ORDER BY SUM(nvl(AFORO,0)) DESC;*/
+
 --6. Obtener el título de las películas estrenadas en la primera quincena de cualquier mes.
 SELECT P.TITULO_P 
 FROM PELICULA P, PROYECCION P2  
@@ -62,6 +69,12 @@ SELECT DISTINCT P.TITULO_P
 FROM PELICULA P, PROYECCION PR
 WHERE P.CIP = PR.CIP 
 AND PR.DIAS_ESTRENO > 50;
+
+/*Apartado 9: incorrecto. Lo correcto sería: 
+SELECT p.TITULO_P FROM PELICULA p , PROYECCION p2
+WHERE p.CIP =p2.CIP
+GROUP BY p.TITULO_P
+HAVING sum(nvl(p2.DIAS_ESTRENO,0))>50;*/
 
 --10. Mostrar el nombre del cine, junto con su dirección y la ciudad en la que está, junto con la sala
 --y el aforo de la sala, y el nombre de las películas que se han proyectado en esa sala.
@@ -100,6 +113,16 @@ AND S.CINE = PR.CINE
 AND S.SALA = PR.SALA 
 HAVING COUNT (PR.CIP) >= 22
 GROUP BY C.CINE, C.CIUDAD_CINE; 
+--me falta el distinct
+
+/*Apartado 13: incorrecto. Lo correcto sería:
+SELECT c.CINE,c.CIUDAD_CINE, count(DISTINCT p.CIP)
+FROM CINE c,SALA s, PROYECCION p
+WHERE c.CINE =s.CINE
+AND s.CINE =p.CINE
+AND s.SALA =p.SALA
+GROUP BY c.CINE,c.CIUDAD_CINE
+HAVING count(DISTINCT p.CIP)>=22;*/
 
 --14. Obtener el nombre de la película y el presupuesto de todas las películas
 --americanas estrenadas en un cine de Córdoba, sabiendo que Córdoba está escrito
@@ -122,6 +145,10 @@ WHERE P.CIP = PR.CIP
 AND P.TITULO_P LIKE '%vi%'
 OR P.TITULO_P LIKE '%7%'
 GROUP BY P.TITULO_P; 
+--DUDA
+--lo lógico sería con paréntesis
+
+--Apartado 15: faltan los parentesis despues del And y eso cambia el resultado.
 
 --16. Obtener el presupuesto máximo y el presupuesto mínimo para las películas.
 --Deberás utilizar los alias necesarios.
@@ -163,4 +190,27 @@ FROM TRABAJO TR, PELICULA P
 WHERE TR.CIP = P.CIP
 GROUP BY P.TITULO_P
 ORDER BY P.TITULO_P ASC; 
+
+
+/*Corrección
+Apartado 5: incorrecto. Lo correcto sería SELECT CINE , SUM(nvl(AFORO,0))
+FROM SALA s
+GROUP BY CINE
+HAVING SUM(nvl(AFORO,0))>600
+ORDER BY SUM(nvl(AFORO,0)) DESC;
+
+Apartado 9: incorrecto. Lo correcto sería : SELECT p.TITULO_P FROM PELICULA p , PROYECCION p2
+WHERE p.CIP =p2.CIP
+GROUP BY p.TITULO_P
+HAVING sum(nvl(p2.DIAS_ESTRENO,0))>50;
+
+Apartado 13: incorrecto. Lo correcto sería SELECT c.CINE,c.CIUDAD_CINE, count(DISTINCT p.CIP)
+FROM CINE c,SALA s, PROYECCION p
+WHERE c.CINE =s.CINE
+AND s.CINE =p.CINE
+AND s.SALA =p.SALA
+GROUP BY c.CINE,c.CIUDAD_CINE
+HAVING count(DISTINCT p.CIP)>=22;
+
+Apartado 15: faltan los parentesis despues del And y eso cambia el resultado.*/
  

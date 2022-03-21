@@ -1,6 +1,6 @@
---Consultas multitabla (composición interna)
+--Consultas multitabla (composiciï¿½n interna)
 
---1 Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.
+--1 Obtï¿½n un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.
 
 --2 Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus
 --representantes de ventas.
@@ -14,7 +14,7 @@
 --5 Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes
 --junto con la ciudad de la oficina a la que pertenece el representante.
 
---6 Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
+--6 Lista la direcciï¿½n de las oficinas que tengan clientes en Fuenlabrada.
 
 --7 Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la
 --oficina a la que pertenece el representante.
@@ -27,14 +27,14 @@
 
 
 
---Consultas multitabla (composición externa)
+--Consultas multitabla (composiciï¿½n externa)
 
---1 Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
+--1 Devuelve un listado que muestre solamente los clientes que no han realizado ningï¿½n pago.
 
---2 Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
+--2 Devuelve un listado que muestre solamente los clientes que no han realizado ningï¿½n pedido.
 
---3 Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han
---realizado ningún pedido.
+--3 Devuelve un listado que muestre los clientes que no han realizado ningï¿½n pago y los que no han
+--realizado ningï¿½n pedido.
 
 --4 Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada.
 
@@ -46,9 +46,9 @@
 --7 Devuelve un listado de los productos que nunca han aparecido en un pedido.
 
 --8 Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes
--- de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.
+-- de ventas de algï¿½n cliente que haya realizado la compra de algï¿½n producto de la gama Frutales.
 
---9 Devuelve un listado con los clientes que han realizado algún pedido, pero no han realizado ningún pago.
+--9 Devuelve un listado con los clientes que han realizado algï¿½n pedido, pero no han realizado ningï¿½n pago.
 
 --10 Devuelve un listado con los datos de los empleados que no tienen clientes asociados y el nombre
 --de su jefe asociado.
@@ -57,67 +57,97 @@
 
 --Consultas resumen
 
---1 ¿Cuántos empleados hay en la compañía?
+--1 ï¿½Cuï¿½ntos empleados hay en la compaï¿½ï¿½a?
 
---2 ¿Cuántos clientes tiene cada país?
+--2 ï¿½Cuï¿½ntos clientes tiene cada paï¿½s?
 
---3 ¿Cuál fue el pago medio en 2009?
+--3 ï¿½Cuï¿½l fue el pago medio en 2009?
 
---4 ¿Cuántos pedidos hay en cada estado? Ordena el resultado de forma descendente por el número de pedidos.
+--4 ï¿½Cuï¿½ntos pedidos hay en cada estado? Ordena el resultado de forma descendente por el nï¿½mero de pedidos.
 
---5 Calcula el precio de venta del producto más caro y más barato en una misma consulta.
+--5 Calcula el precio de venta del producto mï¿½s caro y mï¿½s barato en una misma consulta.
 
---6 Calcula el número de clientes que tiene la empresa.
+--6 Calcula el nï¿½mero de clientes que tiene la empresa.
 
---7 ¿Cuántos clientes tiene la ciudad de Madrid?
+--7 ï¿½Cuï¿½ntos clientes tiene la ciudad de Madrid?
 
---8 ¿Calcula cuántos clientes tiene cada una de las ciudades que empiezan por M?
+--8 ï¿½Calcula cuï¿½ntos clientes tiene cada una de las ciudades que empiezan por M?
 
---9 Devuelve el código de empleado y el número de clientes al que atiende cada representante de ventas.
+--9 Devuelve el cï¿½digo de empleado y el nï¿½mero de clientes al que atiende cada representante de ventas.
 
---10 Calcula el número de clientes que no tiene asignado representante de ventas.
+--10 Calcula el nï¿½mero de clientes que no tiene asignado representante de ventas.
 
---11 Calcula la fecha del primer y último pago realizado por cada uno de los clientes.
+--11 Calcula la fecha del primer y ï¿½ltimo pago realizado por cada uno de los clientes.
 
---12 Calcula el número de productos diferentes que hay en cada uno de los pedidos.
+--12 Calcula el nï¿½mero de productos diferentes que hay en cada uno de los pedidos.
 
 --13 Calcula la suma de la cantidad total de todos los productos que aparecen en cada uno de los pedidos.
 
---14 Devuelve un listado de los 20 códigos de productos más vendidos y el número total de unidades que se
---han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas.
+--14 Devuelve un listado de los 20 cï¿½digos de productos mï¿½s vendidos y el nï¿½mero total de unidades que se
+--han vendido de cada uno. El listado deberï¿½ estar ordenado por el nï¿½mero total de unidades vendidas.
 
---15 La facturación que ha tenido la empresa en toda la historia, indicando la base imponible, el IVA y
---el total facturado. La base imponible se calcula sumando el coste del producto por el número de
+--15 La facturaciï¿½n que ha tenido la empresa en toda la historia, indicando la base imponible, el IVA y
+--el total facturado. La base imponible se calcula sumando el coste del producto por el nï¿½mero de
 --unidades vendidas de la tabla detalle_pedido. El IVA es el 21 % de la base imponible, y el total la
 --suma de los dos campos anteriores.
 
---16 La misma información que en la pregunta anterior, pero agrupada por código de producto.
+--16 La misma informaciï¿½n que en la pregunta anterior, pero agrupada por cï¿½digo de producto.
 
---17 La misma información que en la pregunta anterior, pero agrupada por código de producto filtrada
---por los códigos que empiecen por OR.
+--17 La misma informaciï¿½n que en la pregunta anterior, pero agrupada por cï¿½digo de producto filtrada
+--por los cï¿½digos que empiecen por OR.
 
---18 Lista las ventas totales de los productos que hayan facturado más de 3000 euros. Se mostrará el
+--18 Lista las ventas totales de los productos que hayan facturado mï¿½s de 3000 euros. Se mostrarï¿½ el
 --nombre, unidades vendidas, total facturado y total facturado con impuestos (21% IVA).
 
 
 
 --Subconsultas
---1 Devuelve el nombre del cliente con mayor límite de crédito.
---2 Devuelve el nombre, apellido1 y cargo de los empleados que no representen a ningún cliente.
---3 Devuelve el nombre del producto que tenga el precio de venta más caro.
---4 Devuelve el nombre del producto del que se han vendido más unidades. (Ten en cuenta que
---tendrás que calcular cuál es el número total de unidades que se han vendido de cada producto a
---partir de los datos de la tabla detalle_pedido. Una vez que sepas cuál es el código del producto,
---puedes obtener su nombre fácilmente.)
---5 Los clientes cuyo límite de crédito sea mayor que los pagos que haya realizado.
---6 El producto que más unidades tiene en stock y el que menos unidades tiene.
+--1 Devuelve el nombre del cliente con mayor lï¿½mite de crï¿½dito.
+SELECT NOMBRE_CLIENTE 
+FROM CLIENTE
+WHERE LIMITE_CREDITO = (SELECT MAX(LIMITE_CREDITO) FROM CLIENTE);
+
+--2 Devuelve el nombre, apellido1 y cargo de los empleados que no representen a ningï¿½n cliente.
+SELECT NOMBRE, APELLIDO1, PUESTO
+FROM EMPLEADO
+WHERE CODIGO_EMPLEADO NOT IN (SELECT CODIGO_EMPLEADO_REP_VENTAS FROM CLIENTE);
+
+--3 Devuelve el nombre del producto que tenga el precio de venta mï¿½s caro.
+SELECT NOMBRE 
+FROM PRODUCTO
+WHERE PRECIO_VENTA = (SELECT MAX(PRECIO_VENTA) FROM PRODUCTO);
+
+--4 Devuelve el nombre del producto del que se han vendido mï¿½s unidades. (Ten en cuenta que
+--tendrï¿½s que calcular cuï¿½l es el nï¿½mero total de unidades que se han vendido de cada producto a
+--partir de los datos de la tabla detalle_pedido. Una vez que sepas cuï¿½l es el cï¿½digo del producto,
+--puedes obtener su nombre fï¿½cilmente.)
+SELECT P. NOMBRE 
+FROM PRODUCTO P
+WHERE P.CODIGO_PRODUCTO = (SELECT CODIGO_PRODUCTO FROM DETALLE_PEDIDO
+							WHERE CANTIDAD >= ALL (SELECT CANTIDAD FROM DETALLE_PEDIDO));
+
+--5 Los clientes cuyo lï¿½mite de crï¿½dito sea mayor que los pagos que haya realizado.
+SELECT *
+FROM CLIENTE 
+WHERE LIMITE_CREDITO > (SELECT SUM(TOTAL) FROM PAGO P, CLIENTE C WHERE C.CODIGO_CLIENTE = P.CODIGO_CLIENTE);
+						
+--6 El producto que mï¿½s unidades tiene en stock y el que menos unidades tiene.
+SELECT P1.CODIGO_PRODUCTO, P2.CODIGO_PRODUCTO 
+FROM PRODUCTO P1, PRODUCTO P2 
+WHERE 
+SELECT MAX(CANTIDAD_EN_STOCK), MIN(CANTIDAD_EN_STOCK) FROM PRODUCTO;
+--SIN ACABAR
+
 --7 Devuelve el nombre, los apellidos y el email de los empleados a cargo de Alberto Soria.
+SELECT NOMBRE, APELLIDO1, APELLIDO2, EMAIL 
+FROM EMPLEADO e 
+
 
 
 --Consultas variadas
---1 Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado.
---Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido.
+--1 Devuelve el listado de clientes indicando el nombre del cliente y cuï¿½ntos pedidos ha realizado.
+--Tenga en cuenta que pueden existir clientes que no han realizado ningï¿½n pedido.
 --2 Devuelve un listado con los nombres de los clientes y el total pagado por cada uno de ellos. Tenga
---en cuenta que pueden existir clientes que no han realizado ningún pago.
---3 Devuelve el nombre de los clientes que hayan hecho pedidos en 2008 ordenados alfabéticamente
+--en cuenta que pueden existir clientes que no han realizado ningï¿½n pago.
+--3 Devuelve el nombre de los clientes que hayan hecho pedidos en 2008 ordenados alfabï¿½ticamente
 --de menor a mayor.
