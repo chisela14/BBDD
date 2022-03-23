@@ -247,27 +247,66 @@ WHERE P.CODIGO_PRODUCTO = (SELECT CODIGO_PRODUCTO FROM DETALLE_PEDIDO
 						--ESTA MAL
 
 --5 Los clientes cuyo l�mite de cr�dito sea mayor que los pagos que haya realizado.
-SELECT *
-FROM CLIENTE 
-WHERE LIMITE_CREDITO > (SELECT SUM(TOTAL) FROM PAGO P, CLIENTE C WHERE C.CODIGO_CLIENTE = P.CODIGO_CLIENTE);
+SELECT C.*
+FROM CLIENTE C
+WHERE C.LIMITE_CREDITO > (SELECT SUM(P.TOTAL) FROM PAGO P WHERE C.CODIGO_CLIENTE = P.CODIGO_CLIENTE);
 						
 --6 El producto que m�s unidades tiene en stock y el que menos unidades tiene.
-SELECT P1.CODIGO_PRODUCTO, P2.CODIGO_PRODUCTO 
-FROM PRODUCTO P1, PRODUCTO P2 
-WHERE 
-SELECT MAX(CANTIDAD_EN_STOCK), MIN(CANTIDAD_EN_STOCK) FROM PRODUCTO;
---SIN ACABAR
+SELECT NOMBRE 
+FROM PRODUCTO
+WHERE CANTIDAD_EN_STOCK = (SELECT MAX(CANTIDAD_EN_STOCK) FROM PRODUCTO)
+OR CANTIDAD_EN_STOCK = (SELECT MIN(CANTIDAD_EN_STOCK) FROM PRODUCTO);
 
 --7 Devuelve el nombre, los apellidos y el email de los empleados a cargo de Alberto Soria.
 SELECT NOMBRE, APELLIDO1, APELLIDO2, EMAIL 
 FROM EMPLEADO 
-
-
+WHERE CODIGO_JEFE = (SELECT J.CODIGO_EMPLEADO
+					FROM EMPLEADO J
+					WHERE UPPER(J.NOMBRE) LIKE '%ALBERTO%'
+					AND UPPER(J.APELLIDO1) LIKE '%SORIA%');
 
 --Consultas variadas
 --1 Devuelve el listado de clientes indicando el nombre del cliente y cu�ntos pedidos ha realizado.
 --Tenga en cuenta que pueden existir clientes que no han realizado ning�n pedido.
+SELECT C.NOMBRE_CLIENTE, NVL(COUNT(P.CODIGO_PEDIDO),0)
+FROM CLIENTE C, PEDIDO P
+WHERE C.CODIGO_CLIENTE = P.CODIGO_CLIENTE (+)
+GROUP BY C.NOMBRE_CLIENTE; 
+
 --2 Devuelve un listado con los nombres de los clientes y el total pagado por cada uno de ellos. Tenga
 --en cuenta que pueden existir clientes que no han realizado ning�n pago.
+SELECT C.NOMBRE_CLIENTE, NVL(SUM(P.TOTAL), 0)
+FROM CLIENTE C, PAGO P
+WHERE C.CODIGO_CLIENTE = P.CODIGO_CLIENTE (+)
+GROUP BY C.NOMBRE_CLIENTE; 
+
 --3 Devuelve el nombre de los clientes que hayan hecho pedidos en 2008 ordenados alfab�ticamente
 --de menor a mayor.
+SELECT DISTINCT C.NOMBRE_CLIENTE 
+FROM CLIENTE C, PEDIDO P 
+WHERE C.CODIGO_CLIENTE = P.CODIGO_CLIENTE 
+AND EXTRACT(YEAR FROM P.FECHA_PEDIDO) = 2008
+ORDER BY C.NOMBRE_CLIENTE ASC;
+
+--4 Devuelve el nombre del cliente, el nombre y primer apellido de su representante de ventas y el
+--número de teléfono de la oficina del representante de ventas, de aquellos clientes que no hayan
+--realizado ningún pago.
+
+
+--5 Devuelve el listado de clientes donde aparezca el nombre del cliente, el nombre y primer apellido
+--de su representante de ventas y la ciudad donde está su oficina.
+
+
+--6 Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean
+--representante de ventas de ningún cliente.
+
+
+--7 Devuelve un listado indicando todas las ciudades donde hay oficinas y el número de empleados
+--que tiene.
+
+
+
+
+
+
+
