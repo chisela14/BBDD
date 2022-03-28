@@ -1,9 +1,27 @@
 
 --1. Número de clientes que tienen alguna factura con IVA 16%.
-
+SELECT COUNT (CODCLI)
+FROM CLIENTES 
+WHERE CODCLI IN (SELECT CODCLI FROM FACTURAS WHERE IVA = 16);
 
 --2. Número de clientes que no tienen ninguna factura con un 16% de IVA.
+SELECT COUNT (CODCLI)
+FROM CLIENTES 
+WHERE CODCLI IN (SELECT CODCLI FROM FACTURAS WHERE IVA != 16);
+
+--219 NO TIENE QUE SALIR (9)
+SELECT CODCLI FROM FACTURAS WHERE IVA = ANY (SELECT IVA FROM FACTURAS WHERE IVA!=16);
+
 --3. Número de clientes que en todas sus facturas tienen un 16% de IVA (los clientes deben tener al menos una factura).
+SELECT COUNT (CODCLI)
+FROM CLIENTES 
+WHERE CODCLI = ALL (SELECT CODCLI FROM FACTURAS WHERE IVA = 16);
+--CODCLI 219 TIENE DOS FACTURAS (12)
+
+SELECT *
+FROM FACTURAS 
+ORDER BY CODCLI;
+
 --4. Fecha de la factura con mayor importe (sin tener en cuenta descuentos ni impuestos).
 --5. Número de pueblos en los que no tenemos clientes.
 --6. Número de artículos cuyo stock supera las 20 unidades, con precio superior a 15 euros y de los que no hay ninguna 
