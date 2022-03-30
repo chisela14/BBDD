@@ -1,26 +1,104 @@
 --Pez1
+
 --1. Nombre, apellido y teléfono de todos los afiliados que sean hombres y que hayan nacido antes del
 --1 de enero de 1070
+SELECT NOMBRE, APELLIDOS, TELF  
+FROM AFILIADOS 
+WHERE SEXO = 'H' 
+AND NACIMIENTO < TO_DATE ('01/01/1070', 'DD/MM/YYYY');
+--1070 NINGUNO, 1970 19
+
 --2. Peso, talla y nombre de todos los peces que se han pescado por con talla inferior o igual a 45. Los
 --datos deben salir ordenados por el nombre del pez, y para el mismo pez por el peso (primero los
 --más grandes) y para el mismo peso por la talla (primero los más grandes).
+
+--UNION
+SELECT PEZ, PESO, TALLA 
+FROM CAPTURASSOLOS 
+WHERE TALLA <= 45
+UNION 
+SELECT PEZ, PESO, TALLA 
+FROM CAPTURASEVENTOS  
+WHERE TALLA <= 45
+ORDER BY PEZ, PESO DESC, TALLA DESC;
+
 --3. Obtener los nombres y apellidos de los afiliados que o bien tienen la licencia de pesca que
 --comienzan con una A (mayúscula o minúscula), o bien el teléfono empieza en 9 y la dirección
 --comienza en Avda.
+SELECT DISTINCT A.NOMBRE, A.APELLIDOS 
+FROM AFILIADOS A, PERMISOS P
+WHERE A.FICHA = P.FICHA 
+AND UPPER(P.LICENCIA) LIKE 'A%'
+OR (A.TELF LIKE '9%'
+AND A.DIRECCION LIKE 'Avda.%');
+
 --4. Lugares del cauce “Rio Genil” que en el campo de observaciones no tengan valor.
+--OBERVACIONES DE LA TABLA LUGARES
+SELECT LUGAR
+FROM LUGARES 
+WHERE UPPER(CAUCE) LIKE 'RIO GENIL'
+AND OBSERVACIONES IS NULL;
+
+--OBSERVACIONES DE LA TABLA CAUCES
+SELECT L.LUGAR
+FROM LUGARES L, CAUCES C
+WHERE L.CAUCE = C.CAUCE 
+AND UPPER(C.CAUCE) LIKE 'RIO GENIL'
+AND C.OBSERVACIONES IS NULL;
+
 --5. Mostrar el nombre y apellidos de cada afiliado, junto con la ficha de los afiliados que lo han
 --avalado alguna vez como primer avalador.
+SELECT A.NOMBRE, A.APELLIDOS, C.AVAL1  
+FROM AFILIADOS A, CAPTURASSOLOS C
+WHERE A.FICHA = C.FICHA (+); 
+
 --6. Obtén los cauces y en qué lugar de ellos han encontrado tencas (tipo de pez) cuando nuestros
 --afiliados han ido a pescar solos, indicando la comunidad a la que pertenece dicho lugar. (no deben
 --salir valores repetidos)
+SELECT DISTINCT L.CAUCE, L.LUGAR, L.COMUNIDAD 
+FROM LUGARES L, CAPTURASSOLOS C
+WHERE L.LUGAR = C.LUGAR 
+AND UPPER(C.PEZ) = 'TENCA';
+
 --7. Mostrar el nombre y apellido de los afiliados que han conseguido alguna copa. Los datos deben
 --salir ordenador por la fecha del evento, mostrando primero los eventos más antiguos.
+SELECT A.NOMBRE, A.APELLIDOS, E.FECHA_EVENTO  
+FROM AFILIADOS A, PARTICIPACIONES P, EVENTOS E
+WHERE A.FICHA = P.FICHA 
+AND P.EVENTO = E.EVENTO 
+ORDER BY E.FECHA_EVENTO;
+
 --8. Obtén la ficha, nombre, apellidos, posición y trofeo de todos los participantes del evento 'Super
 --Barbo' mostrándolos según su clasificación.
+SELECT A.FICHA, A.NOMBRE, A.APELLIDOS, P.POSICION, P.TROFEO  
+FROM AFILIADOS A, PARTICIPACIONES P
+WHERE A.FICHA = P.FICHA 
+AND UPPER(P.EVENTO) LIKE 'SUPER BARBO'
+ORDER BY P.POSICION;
+
 --9. Mostrar el nombre y apellidos de cada afiliado, junto con el nombre y apellidos de los afiliados
 --que lo han avalado alguna vez como segundo avalador.
+--MAL
+SELECT A.NOMBRE, A.APELLIDOS, AVAL.NOMBRE, AVAL.APELLIDOS  
+FROM AFILIADOS A, CAPTURASSOLOS C, AFILIADOS AVAL
+WHERE A.FICHA = C.FICHA (+)
+AND AVAL.FICHA = C.FICHA (+)
+AND C.AVAL2 IS NOT NULL; 
+
+SELECT DISTINCT FICHA FROM CAPTURASSOLOS;
+
 --10. Indica todos los eventos en los que participó el afiliado 3796 en 1995 que no consiguió
 --trofeo, ordenados descendentemente por fecha.
+SELECT P.EVENTO 
+FROM PARTICIPACIONES P, EVENTOS E
+WHERE P.EVENTO = E.EVENTO 
+AND P.FICHA = 3796
+AND EXTRACT (YEAR FROM E.FECHA_EVENTO) = 1995
+AND P.TROFEO IS NULL 
+ORDER BY E.FECHA_EVENTO DESC; 
+
+
+
 
 --Pez2
 --1. Mostrar el nombre y apellidos de todos los afiliados que tengan una licencia que empieza por A.
