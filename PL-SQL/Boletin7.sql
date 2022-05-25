@@ -161,6 +161,73 @@ BEGIN
 	
 END gestion_sede_departamentos;
 
+--bien
+CREATE OR REPLACE
+TRIGGER Actualizacion_departamento
+INSTEAD OF DELETE OR INSERT OR UPDATE ON SEDE_DEPARTAMENTOS
+FOR EACH ROW
+DECLARE
+cantidad NUMBER(3);
+
+BEGIN
+-- Modificamos datos
+IF UPDATING THEN
+UPDATE CENTROS
+SET NOMCE = :new.NOMCE, DIRCE = :new.DIRCE
+WHERE NUMCE = :old.NUMCE;
+UPDATE DEPARTAMENTOS
+SET NUMCE = :new.NUMCE, NOMDE = :new.NOMDE, DIREC = :new.DIREC,
+TIDIR = :new.TIDIR, PRESU = :new.PRESU, DEPDE = :new.DEPDE
+WHERE NUMCE = :old.NUMCE AND NUMDE = :old.NUMDE;
+-- Borramos datos
+ELSIF DELETING THEN
+-- Si el departamento tiene empleados
+-- los movemos al departamento 'TEMP', luego borramos el partamento
+-- Si el centro tiene departamentos, no borramos el centro.
+SELECT COUNT(NUMDE) INTO cantidad
+FROM EMPLEADOS WHERE NUMDE = :old.NUMDE;
+IF cantidad > 0 THEN
+UPDATE EMPLEADOS SET NUMDE = 0 WHERE NUMDE = :old.NUMDE;
+END IF;
+DELETE DEPARTAMENTOS WHERE NUMDE = :old.NUMDE;
+SELECT COUNT(NUMCE) INTO cantidad
+FROM DEPARTAMENTOS WHERE NUMCE = :old.NUMCE;
+IF cantidad = 0 THEN
+DELETE CENTROS WHERE NUMCE = :old.NUMCE;
+END IF;
+-- Insertamos datos
+ELSIF INSERTING THEN
+-- Si el centro o el departamento no existe lo damos de alta,
+-- en otro caso actualizamos los datos
+SELECT COUNT(NUMCE) INTO cantidad
+FROM CENTROS WHERE NUMCE = :new.NUMCE;
+IF cantidad = 0 THEN
+INSERT INTO CENTROS
+VALUES(:new.NUMCE, :new.NOMCE, :new.DIRCE);
+ELSE
+UPDATE CENTROS
+SET NOMCE = :new.NOMCE, DIRCE = :new.DIRCE
+WHERE NUMCE = :new.NUMCE;
+END IF;
+SELECT COUNT(NUMDE) INTO cantidad
+FROM DEPARTAMENTOS WHERE NUMDE = :new.NUMDE;
+IF cantidad = 0 THEN
+INSERT INTO DEPARTAMENTOS
+VALUES(:new.NUMDE, :new.NUMCE, :new.DIREC, :new.TIDIR,
+:new.PRESU, :new.DEPDE, :new.NOMDE);
+ELSE
+UPDATE DEPARTAMENTOS
+
+SET NUMCE = :new.NUMCE, DIREC = :new.DIREC, TIDIR = :new.TIDIR,
+PRESU = :new.PRESU, DEPDE = :new.DEPDE, NOMDE = :new.NOMDE
+WHERE NUMCE = :new.NUMCE;
+END IF;
+ELSE
+RAISE_APPLICATION_ERROR(-20500, 'Error en la actualización');
+END IF;
+END Actualizacion_departamento;
+/
+
 
 --7.5. Realiza las siguientes operaciones para comprobar si el disparador anterior
 --funciona correctamente.
