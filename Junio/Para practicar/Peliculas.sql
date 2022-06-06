@@ -84,7 +84,7 @@ SELECT PKG_PELICULAS.numPeliculas('Daniel Myrick') FROM DUAL;
 
 --4. Realiza un trigger o trigger que creas necesario para impedir que un personaje trabaje más de una vez en
 --la misma película. Si ya ha trabajado deberá lanzar una exception (2 puntos)
-
+--?
 CREATE OR REPLACE 
 TRIGGER comprobarTrabajos IS 
 	CURSOR c_personajes IS 
@@ -108,7 +108,13 @@ END
 --punto)
 
 CREATE OR REPLACE 
-TRIGGER personajeMayus IS 
+TRIGGER personajeMayus 
+AFTER INSERT ON PERSONAJE 
+BEGIN 
+	UPDATE PERSONAJE SET NOMBRE_PERSONA = UPPER(NOMBRE_PERSONA); 
+END personajeMayus;
+--NO FUNCIONA
+INSERT INTO PERSONAJE(NOMBRE_PERSONA) VALUES('prueba');
 
 --6. Crea una tabla llamada log con un único campo de tipo varchar llamado descripcion y realizar un trigger
 --o los trigger que creas necesario para las modificaciones que sufre la tabla personaje. Debe registrarse “El
