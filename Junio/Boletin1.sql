@@ -64,7 +64,7 @@ END;
 --menor que los valores máximo y mínimo respectivamente para su cargo. Se agrega la
 --restricción de que el trigger no se disparará si el oficio es PRESIDENTE.
 
---NO HAY VALORES MAXIMO Y MINIMO SEGÚN CARGO(TAMPOCO HAY CARGOS PREDEFINIDOS)
+--sacarlo yo
 
 
 --4. Crea triggers que permitan actualizar en cascada el campo tipo de la tabla tipos_pieza en

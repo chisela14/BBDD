@@ -112,8 +112,8 @@ INSERT
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111103-S','El fin de los d�as',
-         1999,'El fin de los d�as','EE.UU',7000,122);
+  VALUES ('11111103-S','El fin de los dias',
+         1999,'El fin de los dias','EE.UU',7000,122);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -122,8 +122,8 @@ INSERT
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111104-S','Bowfinger, El p�caro',
-         1999,'Bowfinger, El p�caro','EE.UU',4500,100);
+  VALUES ('11111104-S','Bowfinger, El picaro',
+         1999,'Bowfinger, El picaro','EE.UU',4500,100);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -137,8 +137,8 @@ INSERT
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111107-S','Jugando con el coraz�n',
-         1995,'Jugando con el coraz�n','EE.UU',2500,98);
+  VALUES ('11111107-S','Jugando con el corazon',
+         1995,'Jugando con el corazon','EE.UU',2500,98);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -157,13 +157,13 @@ INSERT
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111111-S','Soledad en las monta�as',
-         1999,'Soledad en las monta�as','EE.UU',900,125);
+  VALUES ('11111111-S','Soledad en las montanas',
+         1999,'Soledad en las montanas','EE.UU',900,125);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
   VALUES ('11111112-S','Accidente 703',
-         1995,'Accidente 703','Espa�ola',250,95);
+         1995,'Accidente 703','Espanola',250,95);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -173,7 +173,7 @@ INSERT
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
   VALUES ('11111114-S','Veintisiete horas',
-         1998,'Veintisiete horas','Espa�ola',600,79);
+         1998,'Veintisiete horas','Espanola',600,79);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -197,8 +197,8 @@ INSERT
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111119-S','Vicios peque�os',
-         1997,'Vicios peque�os','Francia/Italia',340,90);
+  VALUES ('11111119-S','Vicios pequenos',
+         1997,'Vicios pequenos','Francia/Italia',340,90);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -218,11 +218,11 @@ INSERT
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
   VALUES ('11111123-S','Volver a empezar',
-         1996,'Volver a empezar','Espa�ola',650,87);
+         1996,'Volver a empezar','Espanola',650,87);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111124-S','Volver�s',1998,'Volver�s',
+  VALUES ('11111124-S','Volveras',1998,'Volveras',
          'EE.UU',550,96);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
