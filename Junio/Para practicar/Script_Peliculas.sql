@@ -1,3 +1,15 @@
+--ALTER session set "_oracle_script"=true;
+--CREATE USER PARAPRACTICAR IDENTIFIED BY PARAPRACTICAR;
+--GRANT CONNECT, RESOURCE, DBA TO PARAPRACTICAR;
+
+DROP TABLE Proyeccion;
+DROP TABLE Sala;
+DROP TABLE Cine;
+DROP TABLE Trabajo;
+DROP TABLE Tarea;
+DROP TABLE Personaje;
+DROP TABLE Pelicula;
+
 CREATE TABLE Pelicula  (
   cip VARCHAR2(10) NOT NULL,
   titulo_p VARCHAR2(45) NOT NULL,
@@ -78,7 +90,7 @@ CREATE TABLE Proyeccion  (
   dias_estreno NUMBER(3),
   espectadores NUMBER(6),
   recaudacion NUMBER(8),
-    CONSTRAINT pk_proyección
+    CONSTRAINT pk_proyecciï¿½n
       PRIMARY KEY (cine,sala, cip, fecha_estreno),
     CONSTRAINT fk_pro_sal
       FOREIGN KEY (cine,sala)
@@ -100,8 +112,8 @@ INSERT
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111103-S','El fin de los días',
-         1999,'El fin de los días','EE.UU',7000,122);
+  VALUES ('11111103-S','El fin de los dï¿½as',
+         1999,'El fin de los dï¿½as','EE.UU',7000,122);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -110,8 +122,8 @@ INSERT
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111104-S','Bowfinger, El pícaro',
-         1999,'Bowfinger, El pícaro','EE.UU',4500,100);
+  VALUES ('11111104-S','Bowfinger, El pï¿½caro',
+         1999,'Bowfinger, El pï¿½caro','EE.UU',4500,100);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -125,8 +137,8 @@ INSERT
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111107-S','Jugando con el corazón',
-         1995,'Jugando con el corazón','EE.UU',2500,98);
+  VALUES ('11111107-S','Jugando con el corazï¿½n',
+         1995,'Jugando con el corazï¿½n','EE.UU',2500,98);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -145,13 +157,13 @@ INSERT
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111111-S','Soledad en las montañas',
-         1999,'Soledad en las montañas','EE.UU',900,125);
+  VALUES ('11111111-S','Soledad en las montaï¿½as',
+         1999,'Soledad en las montaï¿½as','EE.UU',900,125);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
   VALUES ('11111112-S','Accidente 703',
-         1995,'Accidente 703','Española',250,95);
+         1995,'Accidente 703','Espaï¿½ola',250,95);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -161,7 +173,7 @@ INSERT
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
   VALUES ('11111114-S','Veintisiete horas',
-         1998,'Veintisiete horas','Española',600,79);
+         1998,'Veintisiete horas','Espaï¿½ola',600,79);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -185,8 +197,8 @@ INSERT
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111119-S','Vicios pequeños',
-         1997,'Vicios pequeños','Francia/Italia',340,90);
+  VALUES ('11111119-S','Vicios pequeï¿½os',
+         1997,'Vicios pequeï¿½os','Francia/Italia',340,90);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
@@ -206,11 +218,11 @@ INSERT
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
   VALUES ('11111123-S','Volver a empezar',
-         1996,'Volver a empezar','Española',650,87);
+         1996,'Volver a empezar','Espaï¿½ola',650,87);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
        nacionalidad,presupuesto,duracion)
-  VALUES ('11111124-S','Volverás',1998,'Volverás',
+  VALUES ('11111124-S','Volverï¿½s',1998,'Volverï¿½s',
          'EE.UU',550,96);
 INSERT 
   INTO Pelicula (cip,titulo_p,ano_produccion,titulo_s,
@@ -247,7 +259,7 @@ INSERT
 INSERT 
   INTO Personaje (nombre_persona,nacionalidad_persona,
        sexo_persona)
-  VALUES ('Euduardo Sánchez','EE.UU','H');
+  VALUES ('Eduardo Sanchez','EE.UU','H');
 INSERT 
   INTO Personaje (nombre_persona,nacionalidad_persona,
        sexo_persona)
@@ -391,19 +403,19 @@ INSERT
 INSERT 
   INTO Personaje (nombre_persona,nacionalidad_persona,
        sexo_persona)
-  VALUES ('Martxelo Rubio','Española','H');
+  VALUES ('Martxelo Rubio','Espanola','H');
 INSERT 
   INTO Personaje (nombre_persona,nacionalidad_persona,
        sexo_persona)
-  VALUES ('Maribel Verdú','Española','M');
+  VALUES ('Maribel Verdu','Espanola','M');
 INSERT 
   INTO Personaje (nombre_persona,nacionalidad_persona,
        sexo_persona)
-  VALUES ('Jon Donosti','Española','H');
+  VALUES ('Jon Donosti','Espanola','H');
 INSERT 
   INTO Personaje (nombre_persona,nacionalidad_persona,
        sexo_persona)
-  VALUES ('Montxo Armendáriz','Española','H');
+  VALUES ('Montxo Armendariz','Espanola','H');
 INSERT 
   INTO Personaje (nombre_persona,nacionalidad_persona,
        sexo_persona)
@@ -461,7 +473,7 @@ INSERT
   VALUES ('11111101-S','Daniel Myrick','Productor');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
-  VALUES ('11111101-S','Euduardo Sánchez','Director');
+  VALUES ('11111101-S','Eduardo Sanchez','Director');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
   VALUES ('11111101-S','Joely Richardson','Actor Secundario');
@@ -527,7 +539,7 @@ INSERT
   VALUES ('11111105-S','Eddie Murphy','Actor Principal');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
-  VALUES ('11111105-S','Euduardo Sánchez','Actor Secundario');
+  VALUES ('11111105-S','Eduardo Sanchez','Actor Secundario');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
   VALUES ('11111105-S','Gilian Anderson','Actriz Principal');
@@ -686,13 +698,13 @@ INSERT
   VALUES ('11111114-S','Martxelo Rubio','Actor Principal');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
-  VALUES ('11111114-S','Maribel Verdú','Actriz Principal');
+  VALUES ('11111114-S','Maribel Verdu','Actriz Principal');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
   VALUES ('11111114-S','Jon Donosti','Actor Secundario');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
-  VALUES ('11111114-S','Montxo Armendáriz','Director');
+  VALUES ('11111114-S','Montxo Armendariz','Director');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
   VALUES ('11111114-S','Zach Galligan','Productor');
@@ -780,7 +792,7 @@ INSERT
   VALUES ('11111118-S','Michael C. Williams','Productor');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
-  VALUES ('11111119-S','Maribel Verdú','Actriz Principal');
+  VALUES ('11111119-S','Maribel Verdu','Actriz Principal');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
   VALUES ('11111119-S','Martxelo Rubio','Actor Secundario');
@@ -810,7 +822,7 @@ INSERT
   VALUES ('11111120-S','Christopher Mcdonald','Actor Secundario');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
-  VALUES ('11111120-S','Montxo Armendáriz','Director');
+  VALUES ('11111120-S','Montxo Armendariz','Director');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
   VALUES ('11111120-S','Zach Galligan','Productor');
@@ -822,7 +834,7 @@ INSERT
   VALUES ('11111121-S','Jon Donosti','Actor Secundario');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
-  VALUES ('11111121-S','Maribel Verdú','Actriz Principal');
+  VALUES ('11111121-S','Maribel Verdu','Actriz Principal');
 INSERT 
   INTO Trabajo (cip,nombre_persona,tarea)
   VALUES ('11111121-S','Jay Acovone','Director');
@@ -920,13 +932,13 @@ INSERT
 -- Se inserta en la tabla Cine
 INSERT 
   INTO Cine (cine,ciudad_cine,direccion_cine)
-  VALUES('El Arcángel','Córdoba','Centro Comercial El Arcángel');
+  VALUES('El Arcangel','Cordoba','Centro Comercial El Arcangel');
 INSERT 
   INTO Cine (cine,ciudad_cine,direccion_cine)
-  VALUES('La Católica','Córdoba','La paz,25');
+  VALUES('La Catolica','Cordoba','La paz,25');
 INSERT 
   INTO Cine (cine,ciudad_cine,direccion_cine)
-  VALUES('Zayra','Córdoba','Centro Comercial La Sierra');
+  VALUES('Zayra','Cordoba','Centro Comercial La Sierra');
 INSERT 
   INTO Cine (cine,ciudad_cine,direccion_cine)
   VALUES('Los Arcos','Madrid','Centro Comercial Los Arcos');
@@ -935,39 +947,39 @@ INSERT
   VALUES('Los Arcos2','Madrid','Centro Cormercila Los Arcos 2');
 INSERT 
   INTO Cine (cine,ciudad_cine,direccion_cine)
-  VALUES('Multicines Ciudad Jardín','Málaga','Ciudad Jardín s/n');
+  VALUES('Multicines Ciudad Jardin','Malaga','Ciudad Jardin s/n');
 
 -- Se inserta en la tabla Sala
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('El Arcángel',1,50);
+  VALUES ('El Arcangel',1,50);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('El Arcángel',2,60);
+  VALUES ('El Arcangel',2,60);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('El Arcángel',3,70);
+  VALUES ('El Arcangel',3,70);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('El Arcángel',4,250);
+  VALUES ('El Arcangel',4,250);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('El Arcángel',5,250);
+  VALUES ('El Arcangel',5,250);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('La Católica',1,120);
+  VALUES ('La Catolica',1,120);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('La Católica',2,120);
+  VALUES ('La Catolica',2,120);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('La Católica',3,120);
+  VALUES ('La Catolica',3,120);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('La Católica',4,120);
+  VALUES ('La Catolica',4,120);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('La Católica',5,120);
+  VALUES ('La Catolica',5,120);
 INSERT 
   INTO Sala (cine,sala,aforo)
   VALUES ('Zayra',1,90);
@@ -1015,35 +1027,35 @@ INSERT
   VALUES ('Los Arcos2',5,125);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('Multicines Ciudad Jardín',1,150);
+  VALUES ('Multicines Ciudad Jardin',1,150);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('Multicines Ciudad Jardín',2,150);
+  VALUES ('Multicines Ciudad Jardin',2,150);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('Multicines Ciudad Jardín',3,150);
+  VALUES ('Multicines Ciudad Jardin',3,150);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('Multicines Ciudad Jardín',4,150);
+  VALUES ('Multicines Ciudad Jardin',4,150);
 INSERT 
   INTO Sala (cine,sala,aforo)
-  VALUES ('Multicines Ciudad Jardín',5,150);
+  VALUES ('Multicines Ciudad Jardin',5,150);
 
 -- Se inserta en la tabla Proyeccion
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',1,'11111102-S',
+  VALUES ('El Arcangel',1,'11111102-S',
          TO_DATE('21/09/1995','DD/MM/YYYY'),10,5000,2500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',2,'11111102-S',
+  VALUES ('El Arcangel',2,'11111102-S',
          TO_DATE('01/10/1995','DD/MM/YYYY'),10,9000,4500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',1,'11111102-S',
+  VALUES ('La Catolica',1,'11111102-S',
          TO_DATE('21/09/1995','DD/MM/YYYY'),10,5000,2500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
@@ -1068,12 +1080,12 @@ INSERT
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',1,'11111102-S',
+  VALUES ('Multicines Ciudad Jardin',1,'11111102-S',
          TO_DATE('21/09/1995','DD/MM/YYYY'),6,3000,2000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',2,'11111102-S',
+  VALUES ('Multicines Ciudad Jardin',2,'11111102-S',
          TO_DATE('27/09/1995','DD/MM/YYYY'),10,5000,2500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
@@ -1088,62 +1100,62 @@ INSERT
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',1,'11111113-S',
+  VALUES ('El Arcangel',1,'11111113-S',
          TO_DATE('21/09/1996','DD/MM/YYYY'),4,1000,500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',2,'11111113-S',
+  VALUES ('El Arcangel',2,'11111113-S',
          TO_DATE('26/09/1996','DD/MM/YYYY'),15,2000,1000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',2,'11111114-S',
+  VALUES ('El Arcangel',2,'11111114-S',
          TO_DATE('22/09/1996','DD/MM/YYYY'),7,4000,2000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',3,'11111114-S',
+  VALUES ('El Arcangel',3,'11111114-S',
          TO_DATE('29/09/1996','DD/MM/YYYY'),10,5000,2500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',4,'11111115-S',
+  VALUES ('El Arcangel',4,'11111115-S',
          TO_DATE('22/09/1996','DD/MM/YYYY'),8,2000,1000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',5,'11111116-S',
+  VALUES ('El Arcangel',5,'11111116-S',
          TO_DATE('22/09/1996','DD/MM/YYYY'),9,6000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',5,'11111123-S',
+  VALUES ('El Arcangel',5,'11111123-S',
          TO_DATE('01/10/1996','DD/MM/YYYY'),15,9000,6000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',1,'11111113-S',
+  VALUES ('La Catolica',1,'11111113-S',
          TO_DATE('21/09/1996','DD/MM/YYYY'),10,5000,2500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',2,'11111114-S',
+  VALUES ('La Catolica',2,'11111114-S',
          TO_DATE('21/09/1996','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',3,'11111115-S',
+  VALUES ('La Catolica',3,'11111115-S',
          TO_DATE('22/09/1996','DD/MM/YYYY'),13,6000,4000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',4,'11111116-S',
+  VALUES ('La Catolica',4,'11111116-S',
          TO_DATE('22/09/1996','DD/MM/YYYY'),10,5000,2500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',5,'11111123-S',
+  VALUES ('La Catolica',5,'11111123-S',
          TO_DATE('22/09/1996','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
@@ -1218,27 +1230,27 @@ INSERT
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',1,'11111114-S',
+  VALUES ('Multicines Ciudad Jardin',1,'11111114-S',
          TO_DATE('21/09/1996','DD/MM/YYYY'),10,5000,2500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',2,'11111113-S',
+  VALUES ('Multicines Ciudad Jardin',2,'11111113-S',
          TO_DATE('21/09/1996','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',3,'11111115-S',
+  VALUES ('Multicines Ciudad Jardin',3,'11111115-S',
          TO_DATE('22/09/1996','DD/MM/YYYY'),13,6000,4000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',4,'11111116-S',
+  VALUES ('Multicines Ciudad Jardin',4,'11111116-S',
          TO_DATE('22/09/1996','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',5,'11111123-S',
+  VALUES ('Multicines Ciudad Jardin',5,'11111123-S',
          TO_DATE('22/09/1996','DD/MM/YYYY'),10,5000,2500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
@@ -1268,53 +1280,53 @@ INSERT
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',1,'11111106-S',
+  VALUES ('El Arcangel',1,'11111106-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',2,'11111117-S',
+  VALUES ('El Arcangel',2,'11111117-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',3,'11111118-S',
+  VALUES ('El Arcangel',3,'11111118-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),13,6000,4000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',4,'11111119-S',
+  VALUES ('El Arcangel',4,'11111119-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),14,1000,500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',5,'11111120-S',
+  VALUES ('El Arcangel',5,'11111120-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',1,'11111117-S',
+  VALUES ('La Catolica',1,'11111117-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),10,5000,2500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',2,'11111106-S',
+  VALUES ('La Catolica',2,'11111106-S',
          TO_DATE('21/09/1997','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',3,'11111118-S',
+  VALUES ('La Catolica',3,'11111118-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),
          19,6000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',4,'11111119-S',
+  VALUES ('La Catolica',4,'11111119-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),10,9000,4500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',5,'11111120-S',
+  VALUES ('La Catolica',5,'11111120-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),21,6000,4000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
@@ -1364,27 +1376,27 @@ INSERT
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',1,'11111120-S',
+  VALUES ('Multicines Ciudad Jardin',1,'11111120-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',2,'11111119-S',
+  VALUES ('Multicines Ciudad Jardin',2,'11111119-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',3,'11111118-S',
+  VALUES ('Multicines Ciudad Jardin',3,'11111118-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),21,6000,4000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',4,'11111117-S',
+  VALUES ('Multicines Ciudad Jardin',4,'11111117-S',
          TO_DATE('22/09/1997','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',5,'11111106-S',
+  VALUES ('Multicines Ciudad Jardin',5,'11111106-S',
          TO_DATE('21/09/1997','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
@@ -1414,62 +1426,62 @@ INSERT
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',1,'11111110-S',
+  VALUES ('El Arcangel',1,'11111110-S',
          TO_DATE('21/09/1998','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',2,'11111121-S',
+  VALUES ('El Arcangel',2,'11111121-S',
          TO_DATE('21/09/1998','DD/MM/YYYY'),10,5000,2500000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',3,'11111122-S',
+  VALUES ('El Arcangel',3,'11111122-S',
          TO_DATE('22/09/1998','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',4,'11111124-S',
+  VALUES ('El Arcangel',4,'11111124-S',
          TO_DATE('22/09/1998','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',5,'11111125-S',
+  VALUES ('El Arcangel',5,'11111125-S',
          TO_DATE('22/09/1998','DD/MM/YYYY'),13,6000,4000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',5,'11111126-S',
+  VALUES ('El Arcangel',5,'11111126-S',
          TO_DATE('07/10/1998','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',1,'11111121-S',
+  VALUES ('La Catolica',1,'11111121-S',
          TO_DATE('21/09/1998','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',2,'11111110-S',
+  VALUES ('La Catolica',2,'11111110-S',
          TO_DATE('21/09/1998','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',2,'11111126-S',
+  VALUES ('La Catolica',2,'11111126-S',
          TO_DATE('05/10/1998','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',3,'11111122-S',
+  VALUES ('La Catolica',3,'11111122-S',
          TO_DATE('22/09/1998','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',4,'11111125-S',
+  VALUES ('La Catolica',4,'11111125-S',
          TO_DATE('22/09/1998','DD/MM/YYYY'),13,6000,4000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',5,'11111126-S',
+  VALUES ('La Catolica',5,'11111126-S',
          TO_DATE('22/09/1998','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
@@ -1529,32 +1541,32 @@ INSERT
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',1,'11111110-S',
+  VALUES ('Multicines Ciudad Jardin',1,'11111110-S',
          TO_DATE('21/09/1998','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',2,'11111121-S',
+  VALUES ('Multicines Ciudad Jardin',2,'11111121-S',
          TO_DATE('21/09/1998','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',3,'11111122-S',
+  VALUES ('Multicines Ciudad Jardin',3,'11111122-S',
          TO_DATE('22/09/1998','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',4,'11111124-S',
+  VALUES ('Multicines Ciudad Jardin',4,'11111124-S',
          TO_DATE('22/09/1998','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',5,'11111125-S',
+  VALUES ('Multicines Ciudad Jardin',5,'11111125-S',
          TO_DATE('22/09/1998','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',5,'11111126-S',
+  VALUES ('Multicines Ciudad Jardin',5,'11111126-S',
          TO_DATE('02/10/1998','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
@@ -1589,52 +1601,52 @@ INSERT
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',1,'11111101-S',
+  VALUES ('El Arcangel',1,'11111101-S',
          TO_DATE('21/09/1999','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',2,'11111103-S',
+  VALUES ('El Arcangel',2,'11111103-S',
          TO_DATE('21/09/1999','DD/MM/YYYY'),13,6000,4000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',3,'11111104-S',
+  VALUES ('El Arcangel',3,'11111104-S',
          TO_DATE('21/09/1999','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',4,'11111105-S',
+  VALUES ('El Arcangel',4,'11111105-S',
          TO_DATE('22/09/1999','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('El Arcángel',5,'11111111-S',
+  VALUES ('El Arcangel',5,'11111111-S',
          TO_DATE('22/09/1999','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',1,'11111101-S',
+  VALUES ('La Catolica',1,'11111101-S',
          TO_DATE('21/09/1999','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',2,'11111103-S',
+  VALUES ('La Catolica',2,'11111103-S',
          TO_DATE('21/09/1999','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',3,'11111104-S',
+  VALUES ('La Catolica',3,'11111104-S',
          TO_DATE('21/09/1999','DD/MM/YYYY'),13,6000,4000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',4,'11111105-S',
+  VALUES ('La Catolica',4,'11111105-S',
          TO_DATE('22/09/1999','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('La Católica',5,'11111111-S',
+  VALUES ('La Catolica',5,'11111111-S',
          TO_DATE('22/09/1999','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
@@ -1689,27 +1701,27 @@ INSERT
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',1,'11111111-S',
+  VALUES ('Multicines Ciudad Jardin',1,'11111111-S',
          TO_DATE('21/09/1999','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',2,'11111105-S',
+  VALUES ('Multicines Ciudad Jardin',2,'11111105-S',
          TO_DATE('22/09/1999','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',3,'11111101-S',
+  VALUES ('Multicines Ciudad Jardin',3,'11111101-S',
          TO_DATE('21/09/1999','DD/MM/YYYY'),11,4000,3000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',4,'11111103-S',
+  VALUES ('Multicines Ciudad Jardin',4,'11111103-S',
          TO_DATE('21/09/1999','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
        dias_estreno,espectadores,recaudacion)
-  VALUES ('Multicines Ciudad Jardín',5,'11111104-S',
+  VALUES ('Multicines Ciudad Jardin',5,'11111104-S',
          TO_DATE('21/09/1999','DD/MM/YYYY'),12,7000,5000000);
 INSERT 
   INTO Proyeccion (cine,sala,cip,fecha_estreno,
