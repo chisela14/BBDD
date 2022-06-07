@@ -6,7 +6,7 @@
 	PROCEDURE verEmpleadoCod (cod EMPLEADO.EMP_NO%TYPE) IS 
 		apellido EMPLEADO.APELLIDO%TYPE;  
 		oficio EMPLEADO.OFICIO%TYPE;
-	--solo se va a generar un resgistro, (de dos campos) asi que nos vale con un cursor implicito
+	--solo se va a generar un registro, (de dos campos) asi que nos vale con un cursor implicito
 	BEGIN
 		SELECT APELLIDO, OFICIO INTO apellido, oficio
 		FROM EMPLEADO
@@ -64,7 +64,24 @@ END;
 --menor que los valores máximo y mínimo respectivamente para su cargo. Se agrega la
 --restricción de que el trigger no se disparará si el oficio es PRESIDENTE.
 
---sacarlo yo
+--me da un fallo que no entiendo
+CREATE OR REPLACE 
+TRIGGER valores_sueldo
+BEFORE INSERT OR UPDATE ON EMPLEADO 
+FOR EACH ROW 
+DECLARE
+	v_sueldoMIN EMPLEADO.SALARIO%TYPE; 
+	v_sueldoMAX EMPLEADO.SALARIO%TYPE;
+BEGIN 
+	SELECT MAX(SALARIO) INTO v_sueldoMAX FROM EMPLEADO WHERE OFICIO = :NEW.OFICIO;
+	SELECT MIN(SALARIO) INTO v_sueldoMIN FROM EMPLEADO WHERE OFICIO = :NEW.OFICIO;
+
+	IF (:NEW.OFICIO != 'PRESIDENTE') == true THEN
+		IF :NEW.SALARIO IS NOT BETWEEN(v_sueldoMIN,v_sueldoMAX) THEN
+			RAISE_APPLICATION_ERROR(-20020,'No se puede annadir un sueldo que no es encuentre entre el sueldo minimo y el sueldo maximo.');
+		END IF;
+	END IF;
+END valores_sueldo;
 
 
 --4. Crea triggers que permitan actualizar en cascada el campo tipo de la tabla tipos_pieza en
