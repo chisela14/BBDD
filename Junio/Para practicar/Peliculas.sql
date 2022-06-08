@@ -86,20 +86,6 @@ SELECT PKG_PELICULAS.numPeliculas('Daniel Myrick') FROM DUAL;
 --4. Realiza un trigger o trigger que creas necesario para impedir que un personaje trabaje más de una vez en
 --la misma película. Si ya ha trabajado deberá lanzar una exception (2 puntos)
 
-/* Después de todo el problema me he dado cuenta de que lo estaba haciendo en base al número de películas general 
- * que ha hecho un personaje asi que esta mal.
-CREATE OR REPLACE 
-TRIGGER comprobarTrabajos 
-BEFORE INSERT ON TRABAJO
-FOR EACH ROW
-
-BEGIN 
-	IF PKG_PELICULAS.numPeliculas(:NEW.NOMBRE_PERSONA)>=1 THEN
-		RAISE_APPLICATION_ERROR(-20002, 'El personaje no puede trabajar mas de una vez en la misma pelicula.');
-	END IF;
-END comprobarTrabajos;
-*/
-
 CREATE OR REPLACE 
 TRIGGER comprobarTrabajos
 BEFORE INSERT OR UPDATE ON TRABAJO
