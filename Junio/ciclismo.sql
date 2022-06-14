@@ -89,13 +89,13 @@ PACKAGE BODY PKG_CICLISTAS IS
 		--comprobar que existe el equipo
 		SELECT count(NOMBRE) INTO comprobar FROM EQUIPOS WHERE CODEQUIPO = v_codEquipo;
 		IF comprobar = 0 THEN
-			--no se ha introducido bien el equipo
+			DBMS_OUTPUT.PUT_LINE('No existe el equipo. Procedemos a crearlo');
+			INSERT INTO EQUIPOS(CODEQUIPO, NOMBRE) VALUES(v_codEquipo,v_nombreEq);
+		--el codigo existe pero no se ha introducido bien el nombre del equipo
+		ELSE
 			SELECT nombre INTO nombreEq FROM EQUIPOS WHERE CODEQUIPO = v_codEquipo;
 			IF nombreEq != v_nombreEq THEN
 				RAISE_APPLICATION_ERROR(-20007,'El nombre del equipo no coincide con su código');
-			ELSE
-				DBMS_OUTPUT.PUT_LINE('No existe el equipo. Procedemos a crearlo');
-				INSERT INTO EQUIPOS(CODEQUIPO, NOMBRE) VALUES(v_codEquipo,v_nombreEq);
 			END IF;
 		END IF;
 		--si la nacionalidad no tiene valor sera “ESPAÑOL”.
@@ -148,23 +148,39 @@ END PKG_CICLISTAS;
 BEGIN
 	PKG_CICLISTAS.listado;
 END;
+
 --3
 SELECT PKG_CICLISTAS.VICTORIAS('kass') FROM DUAL;
 SELECT PKG_CICLISTAS.VICTORIAS('Reynolds') FROM DUAL;
+
 --4
---(v_nombre CICLISTAS.NOMBRE%TYPE, v_nacionalidad CICLISTAS.NACIONALIDAD%TYPE, v_fecha
-	--CICLISTAS.FECHANACIMIENTO%TYPE, v_codEquipo CICLISTAS.CODEQUIPO%TYPE, v_nombreEq EQUIPOS.NOMBRE%TYPE)
 DECLARE
 	RESULTADO NUMBER;
 BEGIN
+	--Insertar con equipo existente
+	/*
 	RESULTADO:= PKG_CICLISTAS.agregarCiclista('Angelis','Italiano',to_date('11/02/1990','dd/mm/yyyy'),3,'Faema');
 	DBMS_OUTPUT.PUT_LINE('Dorsal del nuevo ciclista: '||resultado);
-	--REVISAR
+	*/
+	
+	--El nombre no coincide con el codigo
+	--RESULTADO:= PKG_CICLISTAS.agregarCiclista('PRUEBA','Italiano',to_date('11/02/1991','dd/mm/yyyy'),3,'Faem');
+	
+	--Ya se ha creado antes, ya existe
+	/*
+	RESULTADO:= PKG_CICLISTAS.agregarCiclista('Angelis','Italiano',to_date('11/02/1990','dd/mm/yyyy'),3,'Faema');
+	DBMS_OUTPUT.PUT_LINE('Dorsal del nuevo ciclista: '||resultado);
+	*/
+	
+	--Insertar con equipo nuevo y nacionalidad vacia(se asigna "Español")
 	RESULTADO:= PKG_CICLISTAS.agregarCiclista('Vicente','',to_date('11/02/1995','dd/mm/yyyy'),7,'Jacaranda');
 	DBMS_OUTPUT.PUT_LINE('Dorsal del nuevo ciclista: '||resultado);
+	
 END;
 	--DORSAL = RESULTADO
-	SELECT * FROM ciclistas WHERE DORSAL = 17;
+	SELECT * FROM ciclistas WHERE DORSAL = 18;
+	--DELETE FROM CICLISTAS WHERE DORSAL = 18;
+
 --5
 DECLARE
 	RESULTADO NUMBER;
