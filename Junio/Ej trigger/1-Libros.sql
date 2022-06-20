@@ -67,7 +67,7 @@ UPDATE libros SET precio= 52.50 WHERE titulo = 'El camino de los reyes';
 	--- el "precio", se controla si es mayor o igual a cero, si lo es, debe dejarse el precio
 	--  anterior y mostrar un mensaje de error.
 	--- el stock, debe controlarse que no se ingrese un número negativo ni superior a
-	--  1000, en tal caso, debe rechazarse con un mensaje de error. NO HAY CAMPO STOCK
+	--  1000, en tal caso, debe rechazarse con un mensaje de error. 
 
 CREATE OR REPLACE
 TRIGGER ACTUALIZAR_LIBROS
@@ -81,7 +81,7 @@ BEGIN
    		RAISE_APPLICATION_ERROR(-20002, 'No puedes cambiar el precio a 0 o a un número negativo');
    		END IF;
 	--ELSE
-		--CAMPO STOCK?
+		--NO HAY CAMPO STOCK, TENGO QUE CREAR UN CAMPO STOCK?
   	END IF;
 END ACTUALIZAR_LIBROS;
 
@@ -138,15 +138,17 @@ BEFORE INSERT OR DELETE OR UPDATE OF PRECIO ON LIBROS
 FOR EACH ROW
 BEGIN
 	IF INSERTING OR DELETING THEN
-		IF SYSDATE
+		if ((to_char(sysdate,'dy','nls_date_language=SPANISH') not in ('sáb')) and (to_number(to_char(sysdate,'HH24')) not between 8 and 12)) then
 			RAISE_APPLICATION_ERROR(-20003, 'Sólo se pueden añadir o borrar libros los sábados de 8 a 12')
 		END IF;
 	ELSE
-		IF sysdate 
+		IF ((to_char(sysdate,'dy','nls_date_language=SPANISH') NOT IN ('lun','mar','mié','jue','vie')) and (to_number(to_char(sysdate,'HH24')) not between 8 and 18)) 
+		OR ((to_char(sysdate,'dy','nls_date_language=SPANISH') NOT IN ('sáb')) and (to_number(to_char(sysdate,'HH24')) not between 8 and 12)) THEN 
 			RAISE_APPLICATION_ERROR(-20004, 'Sólo se pueden actualizar los precios de los libros de lunes a viernes de 8 a 18 y los sábados de 8 a 12');
 		END IF;
 	END IF;
 END CONTROL_HORAS;
+
 
 
 
