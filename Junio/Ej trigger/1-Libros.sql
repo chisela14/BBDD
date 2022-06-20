@@ -139,7 +139,7 @@ FOR EACH ROW
 BEGIN
 	IF INSERTING OR DELETING THEN
 		if ((to_char(sysdate,'dy','nls_date_language=SPANISH') not in ('sáb')) and (to_number(to_char(sysdate,'HH24')) not between 8 and 12)) then
-			RAISE_APPLICATION_ERROR(-20003, 'Sólo se pueden añadir o borrar libros los sábados de 8 a 12')
+			RAISE_APPLICATION_ERROR(-20003, 'Sólo se pueden añadir o borrar libros los sábados de 8 a 12');
 		END IF;
 	ELSE
 		IF ((to_char(sysdate,'dy','nls_date_language=SPANISH') NOT IN ('lun','mar','mié','jue','vie')) and (to_number(to_char(sysdate,'HH24')) not between 8 and 18)) 
@@ -149,7 +149,9 @@ BEGIN
 	END IF;
 END CONTROL_HORAS;
 
-
+INSERT INTO LIBROS(TITULO) VALUES('PRUEBA');
+DELETE FROM LIBROS WHERE TITULO = 'Uno';
+UPDATE LIBROS SET PRECIO = 30 WHERE TITULO = 'Uno';
 
 
 
