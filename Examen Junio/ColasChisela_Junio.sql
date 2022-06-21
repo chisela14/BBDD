@@ -1,0 +1,200 @@
+--EJERCICIO 1 - 2P
+--Crea un procedimiento que muestre un listado en el que aparezcan todos los cines, el número de salas que tiene, los
+--nombres de las salas y las películas proyectadas. El formato será el siguiente:
+
+--CINE: nombre_del_cine CIUDAD: nombre_de_la ciudad DIRECCIÓN: dirección NÚMERO DE SALAS: num_salas *** SALA:
+--sala AFORO: aforo NÚMERO DE PELÍCULAS PROYECTADA:num
+--******* TÍTULO: titulo_p FECHA_ESTRENO: fecha_estreno RECAUDACIÓN_SALA; recaudación RECAUDACIÓN PELÍCULA: recaud_película
+--******* TÍTULO: titulo_p FECHA_ESTRENO: fecha_estreno RECAUDACIÓN_SALA; recaudación RECAUDACIÓN PELÍCULA: recaud_película
+--******* TÍTULO: titulo_p FECHA_ESTRENO: fecha_estreno RECAUDACIÓN_SALA; recaudación RECAUDACIÓN PELÍCULA: recaud_película
+--*** SALA: sala AFORO: aforo NÚMERO DE PELÍCULAS PROYECTADA:num
+--****** TÍTULO: titulo_p FECHA_ESTRENO: fecha_estreno RECAUDACIÓN_SALA; recaudación RECAUDACIÓN PELÍCULA: recaud_película
+
+--El listado debe salir ordenados alfabéticamente por cine y por sala. Para las películas que se han proyectado en
+--una sala deben salir primero aquellas que se han estrenado más recientemente.
+
+CREATE OR REPLACE 
+PROCEDURE mostrarCines AS 
+	CURSOR C_CINES IS SELECT * FROM CINE ORDER BY CINE;
+	CURSOR C_SALAS(V_CINE CINE.CINE%TYPE) IS 
+		SELECT SALA, AFORO FROM SALA WHERE CINE = V_CINE ORDER BY SALA; 
+	CURSOR C_PELIS(V2_CINE CINE.CINE%TYPE, V_SALA SALA.SALA%TYPE) IS
+		SELECT P.TITULO_P, PR.FECHA_ESTRENO, PR.RECAUDACION, PR.CIP FROM PROYECCION PR, PELICULA P
+		WHERE PR.CIP = P.CIP AND PR.CINE = V2_CINE AND PR.SALA = V_SALA ORDER BY PR.FECHA_ESTRENO desc;
+	NUM_SALAS NUMBER := 0;
+	NUM_PELIS NUMBER := 0;
+	REC_PELI NUMBER := 0;
+BEGIN 
+	FOR registroCines IN C_CINES LOOP
+		SELECT COUNT(DISTINCT SALA) INTO NUM_SALAS FROM SALA WHERE CINE = registroCines.CINE;
+		DBMS_OUTPUT.PUT_LINE('CINE: '||registroCines.CINE||' CIUDAD: '||registroCines.CIUDAD_CINE||' DIRECCIÓN: '||
+		registroCines.DIRECCION_CINE||' NÚMERO DE SALAS: '||NUM_SALAS);
+		FOR registroSalas IN C_SALAS(registroCines.CINE) LOOP
+			SELECT COUNT(DISTINCT CIP) INTO NUM_PELIS FROM PROYECCION WHERE SALA = registroSalas.SALA AND CINE = registroCines.CINE;
+			DBMS_OUTPUT.PUT_LINE('*** SALA: '||registroSalas.SALA||' AFORO: '||registroSalas.AFORO||
+			' NÚMERO DE PELÍCULAS PROYECTADAS: '||NUM_PELIS);
+			FOR registroPelis IN C_PELIS(registroCines.CINE, registroSalas.SALA) LOOP
+				SELECT SUM(RECAUDACION) INTO REC_PELI FROM PROYECCION WHERE CIP = registroPelis.CIP;
+				DBMS_OUTPUT.PUT_LINE('***** TÍTULO: '||registroPelis.TITULO_P||' FECHA DE ESTRENO: '||registroPelis.FECHA_ESTRENO||
+				' RECAUDACIÓN EN SALA: '||registroPelis.RECAUDACION||' RECAUDACIÓN PELÍCULA: '||REC_PELI);
+			END LOOP;
+		end LOOP; 
+	END LOOP;
+	DBMS_OUTPUT.PUT_LINE('----------------------------------');
+END mostrarCines;
+
+BEGIN 
+	mostrarCines();
+END;
+
+--EJERCICIO 2 - 3P 
+--Crea un trigger para que si el número de asignaturas que imparte un profesor es mayor que 10 entonces se debe
+--impedir dicha asignación y se mostrará un mensaje para decir que el profesor está sobrecargado.
+
+CREATE TABLE PROFESOR(
+DNI VARCHAR2(8),
+NOMBRE VARCHAR2(20),
+APELLIDOS VARCHAR2(30),
+CONSTRAINT PK_PROF PRIMARY KEY(DNI)
+);
+
+CREATE TABLE ASIGNATURA(
+NOMBRE_A VARCHAR2(20),
+DESCRIPCION VARCHAR2(50),
+DNI_PROFESOR VARCHAR2(8),
+CONSTRAINT PK_ASIG PRIMARY KEY(NOMBRE_A),
+CONSTRAINT FK_ASIG FOREIGN KEY(DNI_PROFESOR) REFERENCES PROFESOR(DNI)
+);
+
+CREATE OR REPLACE PACKAGE PCK_PROF IS
+	V_DNI PROFESOR.DNI%TYPE;
+END;
+
+CREATE OR REPLACE 
+TRIGGER VALOR_DNI
+BEFORE INSERT OR UPDATE OF DNI_PROFESOR ON ASIGNATURA
+FOR EACH ROW
+BEGIN
+	SELECT :NEW.DNI_PROFESOR INTO PCK_PROF.V_DNI FROM DUAL;
+END VALOR_DNI;
+
+CREATE OR REPLACE 
+TRIGGER NUM_ASIG_PROF
+AFTER INSERT OR UPDATE ON ASIGNATURA
+DECLARE
+	V_NUM_ASIG NUMBER := 0;
+BEGIN
+	SELECT COUNT(NOMBRE_A) INTO V_NUM_ASIG FROM ASIGNATURA WHERE DNI_PROFESOR = PCK_PROF.V_DNI;
+	IF V_NUM_ASIG >= 10 THEN
+		RAISE_APPLICATION_ERROR(-20001, 'No se puede asignar a la asignatura ese profesor, está sobrecargado');
+	END IF;
+END NUM_ASIG_PROF;
+
+--comprobar, crear 1 profesor y asginarle 10 +1 asignaturas
+INSERT INTO PROFESOR(DNI) VALUES('1');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('A','1');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('B','1');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('C','1');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('D','1');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('E','1');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('F','1');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('G','1');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('H','1');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('I','1');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('J','1');--10
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('K','1');
+--update
+INSERT INTO PROFESOR(DNI) VALUES('2');
+INSERT INTO ASIGNATURA(NOMBRE_A, DNI_PROFESOR) VALUES('L','2');
+UPDATE ASIGNATURA SET DNI_PROFESOR = '1' WHERE NOMBRE_A = 'L';
+
+--EJERCICIO 3 - 3P
+CREATE VIEW VISTA_PROYECCIONES (proyeccion_cine, proyeccion_sala,
+proyeccion_cip, proyeccion_fechaestreno, salacine,sala,sala_aforo) AS
+SELECT p.CINE, p.SALA, p.CIP, p.FECHA_ESTRENO, s.CINE, s.SALA, s.AFORO
+FROM PROYECCION p, SALA s WHERE p.CINE =s.CINE AND p.SALA =s.SALA;
+
+--Deseamos operar sobre los datos correspondientes a la vista anterior. Crea el trigger necesario para
+--realizar inserciones, eliminaciones y modificaciones en la vista anterior.
+
+CREATE OR REPLACE
+TRIGGER TR_VISTA
+INSTEAD OF DELETE OR INSERT OR UPDATE ON VISTA_PROYECCIONES
+FOR EACH ROW
+BEGIN
+	IF UPDATING THEN
+		UPDATE PROYECCION
+		SET CINE = proyeccion_cine, SALA = proyeccion_sala, 
+		CIP = proyeccion_cip, FECHA_ESTRENO = proyeccion_fechaestreno
+		WHERE CINE = CINE AND SALA = SALA 
+		AND CIP = CIP AND FECHA_ESTRENO = FECHA_ESTRENO;
+		
+		UPDATE SALA
+		SET CINE = salacine, SALA = sala, AFORO = sala_aforo
+		WHERE CINE = CINE AND SALA = SALA;
+	
+	ELSIF DELETING THEN
+		DELETE FROM SALA WHERE CINE = CINE AND SALA = SALA;
+		DELETE FROM PROYECCION WHERE CINE = CINE AND SALA = SALA AND CIP = CIP AND FECHA_ESTRENO = FECHA_ESTRENO;
+
+	ELSIF INSERTING THEN
+		INSERT INTO PROYECCION(CINE, SALA, CIP, FECHA_ESTRENO) 
+		VALUES(proyeccion_cine, proyeccion_sala, proyeccion_cip, proyeccion_fechaestreno);
+		INSERT INTO SALA VALUES(salacine, sala, salaforo);
+
+	END IF;
+
+END TR_VISTA;
+
+--COMPROBAR
+INSERT INTO CINE(CINE) VALUES('PRUEBA');
+INSERT INTO SALA VALUES('PRUEBA', 1, 20);
+INSERT INTO PROYECCION(CINE, SALA, CIP, FECHA_ESTRENO) VALUES('PRUEBA',1,'11111126-S', SYSDATE);
+UPDATE PROYECCION SET CIP = '11111125-S' WHERE CINE = 'PRUEBA' AND SALA = 1;
+DELETE FROM PROYECCION WHERE CINE = 'PRUEBA';
+
+--EJERCICIO 4 - 2P
+--Crea una función cuyo nombre sean tus apellidos y que tome como parámetros dos números enteros A
+--y B, y calcule el producto de A y B mediante sumas, mostrando el resultado y devolviéndolo.
+
+CREATE OR REPLACE
+FUNCTION COLAS_GIL(A NUMBER, B NUMBER) RETURN NUMBER IS
+	resultado NUMBER := 0;
+BEGIN
+	FOR i IN 1..B LOOP
+		resultado := resultado + A;
+	end LOOP;
+	DBMS_OUTPUT.PUT_LINE(RESULTADO);
+	RETURN RESULTADO;
+END COLAS_GIL;
+
+--comprobar
+SELECT COLAS_GIL(2,3) FROM DUAL;
+SELECT COLAS_GIL(0,3) FROM DUAL;
+SELECT COLAS_GIL(2,0) FROM DUAL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

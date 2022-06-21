@@ -198,7 +198,7 @@ PROCEDURE VER_APELLIDOS_DEP(V_DEP DEPARTAMENTO.NUM_DEP%TYPE) IS
 	CURSOR C_APELLIDOS IS
 		SELECT APELLIDO FROM EMPLEADO WHERE NUM_DEP = V_DEP;
 BEGIN
-	DBMS_OUTPUT.PUT_LINE('Al departamento '||V_ACOP||' pertenecen los siguientes empleados: ');
+	DBMS_OUTPUT.PUT_LINE('Al departamento '||V_DEP||' pertenecen los siguientes empleados: ');
 	FOR registro IN C_APELLIDOS LOOP
 		DBMS_OUTPUT.PUT_LINE(registro.APELLIDO);
 	END LOOP;
